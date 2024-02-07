@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { HiOutlineStar, HiStar } from "react-icons/hi2";
 import { NavLink, useLocation } from "react-router-dom";
 import ToggleFavorite from "./ToggleFavorite";
 

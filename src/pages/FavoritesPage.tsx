@@ -13,18 +13,15 @@ interface User {
   id: number;
   node_id: string;
   avatar_url: string;
+  isFavorit: boolean;
 }
 
 export default function FavoritesPage() {
   const moveBack = useMoveBack();
-  const { users, isLoading } = useUsers();
+  const { isLoading } = useUsers();
   const { favList } = useFavorites();
 
   if (isLoading) return <Loading />;
-
-  const favoriteList = users.filter((user: User) =>
-    favList.map((val) => val.login).includes(user.login)
-  );
 
   return (
     <StyledPage>

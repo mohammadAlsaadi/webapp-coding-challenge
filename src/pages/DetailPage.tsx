@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
-import SearchBar from "../components/SearchBar";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import DetailCard from "../components/DetailCard";
 import ToggleFavorite from "../components/ToggleFavorite";

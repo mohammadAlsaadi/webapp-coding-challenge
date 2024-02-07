@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import ToggleFavorite from "./ToggleFavorite";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useFavorites } from "../context/favoritesContext";
 
 interface User {
   login: string;
-  avatar_url: string;
   id: number;
-  // Add other properties as needed
+  node_id: string;
+  avatar_url: string;
+  isFavorit: boolean;
 }
 
 interface CardProps {
@@ -17,11 +18,15 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ user }) => {
   const navigate = useNavigate();
-  const { favList, dispatch } = useFavorites();
-
+  const { favList } = useFavorites();
+  const path = useLocation();
+  const pagePath = path.pathname;
+  const id = pagePath === "/favorites" ? Number(user.login) : user.id;
+  console.log(id);
   const isUserFavorited = Boolean(
-    favList.find((userfav) => userfav.login === user.login)
+    Number(favList.find((userFav) => userFav.login)?.login) === id
   );
+
   return (
     <>
       <StyledCard onClick={() => navigate(`/detail/${user.id}`)}>
@@ -33,6 +38,7 @@ const Card: React.FC<CardProps> = ({ user }) => {
         />
         <CardContent>
           <P>@{user.login}</P>
+
           <ToggleFavorite isFavorite={isUserFavorited} />
         </CardContent>
       </StyledCard>
